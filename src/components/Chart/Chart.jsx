@@ -32,6 +32,17 @@ const Chart = ({ data: { confirmed, recovered, deaths }, country })  => {
             backgroundColor: "rgba(255, 0, 0, 0.5)",
             fill: true
           }]
+        }}
+        options={{
+          scales: {
+            yAxes: [{
+              ticks: {
+                callback: function(value, index, values) {
+                  return value.toLocaleString()
+                }
+              }
+            }]
+          }
         }}  
       />
     ) : null
@@ -52,11 +63,6 @@ const Chart = ({ data: { confirmed, recovered, deaths }, country })  => {
               "rgba(255, 0, 0, 0.5)"],
             data: [confirmed.value, recovered.value, deaths.value]
           }],
-         
-        }}
-        options={{
-          legend: { display: false },
-          title: { display: true, text: `Current state in ${country}`}
         }}
       />
     ) : (
@@ -71,11 +77,19 @@ const Chart = ({ data: { confirmed, recovered, deaths }, country })  => {
               "rgba(255, 0, 0, 0.5)"],
             data: [confirmed.value, recovered.value, deaths.value]
           }],
-         
         }}
         options={{
           legend: { display: false },
-          title: { display: true, text: `Current state in ${country}`}
+          title: { display: true, text: `Current state in ${country}`},
+          scales: {
+            yAxes: [{
+              ticks: {
+                callback: function(value, index, values) {
+                  return value.toLocaleString()
+                }
+              }
+            }]
+          }
         }}
       />
     ) : null
