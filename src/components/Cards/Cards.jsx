@@ -5,7 +5,7 @@ import cx from "classnames";
 
 import styles from "./Cards.module.css";
 
-function Cards({ data: { confirmed, recovered, deaths, lastUpdate }}) {
+const Cards = ({ data: { confirmed, recovered, deaths, lastUpdate }}) => {
   if(!confirmed) {
     return "Loading..."
   }

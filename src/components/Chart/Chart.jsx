@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { fetchDailyData } from "../../api";
-import { Line, Bar, HorizontalBar } from "react-chartjs-2";
+import { Line, Bar, HorizontalBar, defaults } from "react-chartjs-2";
 import styles from "./Chart.module.css";
 
+defaults.global.defaultFontFamily = "Roboto";
+defaults.global.title.fontSize = window.innerWidth < 780 ? 16 : 24;
 
 const Chart = ({ data: { confirmed, recovered, deaths }, country })  => {
   const [dailyData, setDailyData] = useState({});
@@ -63,6 +65,19 @@ const Chart = ({ data: { confirmed, recovered, deaths }, country })  => {
               "rgba(255, 0, 0, 0.5)"],
             data: [confirmed.value, recovered.value, deaths.value]
           }],
+        }}
+        options={{
+          legend: { display: false },
+          title: { display: true, text: `Current state in ${country}`},
+          scales: {
+            xAxes: [{
+              ticks: {
+                callback: function(value, index, values) {
+                  return value.toLocaleString()
+                }
+              }
+            }]
+          }
         }}
       />
     ) : (
